@@ -104,3 +104,10 @@ class ReviewDetail(APIView):
         if result.deleted_count > 0:
             return response.Response(status=status.HTTP_204_NO_CONTENT)
         return response.Response(status=status.HTTP_404_NOT_FOUND)
+
+from django.http import JsonResponse
+from api.mongo import reviews_col
+
+def mongo_test(request):
+    data = list(reviews_col.find({}, {"_id": 0}))
+    return JsonResponse(data, safe=False)
