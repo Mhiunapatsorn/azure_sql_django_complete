@@ -20,7 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xzk$v$q2m1-^3b+^ck!6_hk4gmm$47c8zyzo@-o35spu*+shd$'
+
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -90,10 +93,10 @@ WSGI_APPLICATION = 'azure_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'free-sql-db-9416130',
-        'USER': 'napatsornmhiu-admin',
-        'PASSWORD': 'Nnapattam27',
-        'HOST': 'napatsornmhiu.database.windows.net',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
         'PORT': '1433',
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
@@ -107,7 +110,7 @@ import urllib.parse
 # MongoDB Configuration
 
 # MONGO_URI = 'mongodb://localhost:27017/'
-MONGO_URI = f'mongodb+srv://mhiumhiu_db_user:Nnapattam27@cluster0.h2djwpn.mongodb.net/?appName=Cluster0'
+MONGO_URI = os.getenv("MONGO_URI")
 MONGO_DB_NAME = 'mhiu_store_reviews'
 
 # Password validation
