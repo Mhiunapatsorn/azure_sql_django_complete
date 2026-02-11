@@ -111,3 +111,16 @@ from api.mongo import reviews_col
 def mongo_test(request):
     data = list(reviews_col.find({}, {"_id": 0}))
     return JsonResponse(data, safe=False)
+
+
+from rest_framework.decorators import api_view
+from rest_framework import response
+from django.conf import settings
+
+@api_view(['GET'])
+def debug_env(request):
+    import os
+    return response.Response({
+        "ENV_DB_NAME": os.getenv("DB_NAME"),
+        "SETTINGS_DB_NAME": settings.DATABASES['default']['NAME'],
+    })

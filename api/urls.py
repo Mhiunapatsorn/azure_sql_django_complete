@@ -1,5 +1,6 @@
 from django.urls import path
-from . import views
+from . import views 
+from api.views import reviews
 
 # API URL patterns
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('reviews/', views.ReviewList.as_view(), name='review-list'),
     path('reviews/<str:pk>/', views.ReviewDetail.as_view(), name='review-detail'),
     path('connect-db/', views.check_db_connection, name='check-db'),
+    path("debug-env/", reviews.debug_env),
 ]
